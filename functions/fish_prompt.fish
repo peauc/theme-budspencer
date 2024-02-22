@@ -927,11 +927,24 @@ if not begin
 end
 set -x LOGIN $USER
 
+#########
+#Peauc
+#########
+function __peauc_env_checker -d 'Displays the current mode'
+    if test $hostname = peauc-infra
+        set_color -b red
+        echo -n ''
+        echo -n $hostname
+        set_color -b $budspencer_colors[1] red
+    end
+end
+
+
 ###############################################################################
 # => Left prompt
 ###############################################################################
 
 function fish_prompt -d 'Write out the left prompt of the budspencer theme'
-  set -g last_status $status
-  echo -n -s (__budspencer_prompt_bindmode) (__budspencer_prompt_virtual_env) (__budspencer_prompt_node_version) (__budspencer_prompt_repo_branch) (__budspencer_prompt_left_symbols) ' ' (set_color normal)
+    set -g last_status $status
+    echo -n -s (__budspencer_prompt_bindmode) (__peauc_env_checker) (__budspencer_prompt_virtual_env) (__budspencer_prompt_node_version) (__budspencer_prompt_repo_branch) (__budspencer_prompt_left_symbols) ' ' (set_color normal)
 end
